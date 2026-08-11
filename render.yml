@@ -12,3 +12,12 @@ services:
 
       - key: AI_API_KEY
         sync: false
+
+      - key: AI_API_URL
+        sync: false
+
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+
+      - key: RATE_LIMIT_MAX
+        value: "60"
