@@ -1,126 +1,84 @@
-/*
-|--------------------------------------------------------------------------
-| WILLIAME AI SENSI
-|--------------------------------------------------------------------------
-| LOCAL SENSITIVITY ENGINE
-|--------------------------------------------------------------------------
-|
-| IMPORTANT:
-| Ce fichier est public.
-|
-| AUCUNE clé API ne doit être placée ici.
-|
-| La future vraie IA passera par :
-|
-| browser
-|    ↓
-| /api/sensitivity
-|    ↓
-| server.js
-|    ↓
-| process.env.AI_API_KEY
-|    ↓
-| AI provider
-|
-|--------------------------------------------------------------------------
-*/
-
-
-const profileForm =
-    document.getElementById("profileForm");
+const form =
+    document.getElementById(
+        "profileForm"
+    );
 
 const profileSection =
-    document.getElementById("profileSection");
+    document.getElementById(
+        "profileSection"
+    );
 
 const analysisSection =
-    document.getElementById("analysisSection");
+    document.getElementById(
+        "analysisSection"
+    );
 
 const resultSection =
-    document.getElementById("resultSection");
+    document.getElementById(
+        "resultSection"
+    );
 
 const generateButton =
-    document.getElementById("generateButton");
+    document.getElementById(
+        "generateButton"
+    );
 
 const progressBar =
-    document.getElementById("progressBar");
+    document.getElementById(
+        "progressBar"
+    );
 
 const progressText =
-    document.getElementById("progressText");
+    document.getElementById(
+        "progressText"
+    );
 
 const analysisTitle =
-    document.getElementById("analysisTitle");
+    document.getElementById(
+        "analysisTitle"
+    );
 
 const analysisDescription =
-    document.getElementById("analysisDescription");
+    document.getElementById(
+        "analysisDescription"
+    );
 
 const analysisStage =
-    document.getElementById("analysisStage");
+    document.getElementById(
+        "analysisStage"
+    );
 
 const toast =
-    document.getElementById("toast");
+    document.getElementById(
+        "toast"
+    );
 
 
 let currentProfile = null;
 let currentResult = null;
 
 
-/*
-|--------------------------------------------------------------------------
-| HELPERS
-|--------------------------------------------------------------------------
-*/
-
-function clamp(
-    value,
-    min,
-    max
-) {
-
-    return Math.min(
-        Math.max(value, min),
-        max
-    );
-}
-
-
-function round(value) {
-    return Math.round(value);
-}
-
-
-function normalize(
-    value,
-    min,
-    max
-) {
-
-    return clamp(
-        (value - min) / (max - min),
-        0,
-        1
-    );
-}
-
-
 function showToast(message) {
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        toast.classList.remove("show");
+            toast.classList.remove(
+                "show"
+            );
 
-    }, 2600);
+        },
+        2500
+    );
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| GET PROFILE
-|--------------------------------------------------------------------------
-*/
 
 function getProfile() {
 
@@ -134,570 +92,193 @@ function getProfile() {
 
         playerName:
             document
-                .getElementById("playerName")
+                .getElementById(
+                    "playerName"
+                )
                 .value
                 .trim(),
 
         device:
             document
-                .getElementById("device")
+                .getElementById(
+                    "device"
+                )
                 .value
                 .trim(),
 
         platform:
             document
-                .getElementById("platform")
+                .getElementById(
+                    "platform"
+                )
                 .value,
 
         dpi:
             Number(
                 document
-                    .getElementById("dpi")
+                    .getElementById(
+                        "dpi"
+                    )
                     .value
             ),
 
         screen:
             Number(
                 document
-                    .getElementById("screen")
+                    .getElementById(
+                        "screen"
+                    )
                     .value
             ),
 
         ram:
             Number(
                 document
-                    .getElementById("ram")
+                    .getElementById(
+                        "ram"
+                    )
                     .value
             ),
 
         fps:
             Number(
                 document
-                    .getElementById("fps")
+                    .getElementById(
+                        "fps"
+                    )
                     .value
             ),
 
         skill:
             document
-                .getElementById("skill")
+                .getElementById(
+                    "skill"
+                )
                 .value,
 
         playstyle
 
     };
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| DEVICE SCORING
-|--------------------------------------------------------------------------
-*/
-
-function calculateDeviceScore(profile) {
-
-    const dpiScore =
-        1 -
-        Math.abs(
-            profile.dpi - 520
-        ) / 320;
-
-
-    const screenScore =
-        1 -
-        Math.abs(
-            profile.screen - 6.6
-        ) / 3;
-
-
-    const fpsScore =
-        normalize(
-            profile.fps,
-            30,
-            120
-        );
-
-
-    const ramScore =
-        normalize(
-            profile.ram,
-            2,
-            16
-        );
-
-
-    return {
-
-        dpi:
-            clamp(
-                dpiScore,
-                0,
-                1
-            ),
-
-        screen:
-            clamp(
-                screenScore,
-                0,
-                1
-            ),
-
-        fps:
-            fpsScore,
-
-        ram:
-            ramScore
-
-    };
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| LOCAL AI ENGINE
-|--------------------------------------------------------------------------
-|
-| C'est le moteur utilisé dans cette première version.
-|
-| Il ne prétend PAS utiliser une API externe.
-|
-|--------------------------------------------------------------------------
-*/
-
-function generateSensitivity(profile) {
-
-    const style =
-        SENSI_DATA
-            .playstyles[
-                profile.playstyle
-            ];
-
-
-    const skill =
-        SENSI_DATA
-            .skillLevels[
-                profile.skill
-            ];
-
-
-    const fps =
-        SENSI_DATA
-            .fps[
-                profile.fps
-            ];
-
-
-    const platform =
-        SENSI_DATA
-            .platforms[
-                profile.platform
-            ];
-
-
-    const ramAdjustment =
-        SENSI_DATA.ram[
-            profile.ram
-        ] || 0;
-
-
-    const device =
-        calculateDeviceScore(
-            profile
-        );
-
-
-    const stabilityScore =
-        (
-            device.fps * 0.40 +
-            device.ram * 0.25 +
-            device.screen * 0.15 +
-            device.dpi * 0.20
-        ) * 100;
-
-
-    const base =
-        176 +
-
-        ((device.dpi - 0.5) * 8) +
-
-        ((device.fps - 0.5) * 5) +
-
-        ((device.screen - 0.5) * 4) +
-
-        ramAdjustment +
-
-        fps.sensitivity +
-
-        skill.sensitivity +
-
-        platform.sensitivity +
-
-        style.general;
-
-
-    const general =
-        clamp(
-            round(base),
-            80,
-            200
-        );
-
-
-    const redDot =
-        clamp(
-            round(
-                base +
-                style.redDot +
-                device.dpi * 4 +
-                fps.sensitivity
-            ),
-            70,
-            200
-        );
-
-
-    const scope2 =
-        clamp(
-            round(
-                base -
-                6 +
-                style.scope2 +
-                skill.sensitivity * 0.4
-            ),
-            60,
-            200
-        );
-
-
-    const scope4 =
-        clamp(
-            round(
-                base -
-                18 +
-                style.scope4 +
-                skill.sensitivity * 0.25
-            ),
-            50,
-            200
-        );
-
-
-    const sniper =
-        clamp(
-            round(
-                118 +
-                style.sniper +
-                skill.precision +
-                platform.precision +
-                device.screen * 4
-            ),
-            60,
-            180
-        );
-
-
-    const freeLook =
-        clamp(
-            round(
-                base +
-                8 +
-                style.freeLook +
-                device.fps * 3
-            ),
-            80,
-            200
-        );
-
-
-    const fireButton =
-        clamp(
-            round(
-                style.fireButton +
-                (profile.screen - 6.5) * 1.5 +
-                (profile.dpi - 520) / 100 +
-                skill.control * 0.4
-            ),
-            40,
-            60
-        );
-
-
-    const aimSpeed =
-        clamp(
-            round(
-                78 +
-                device.fps * 9 +
-                device.dpi * 4 +
-                style.aimSpeed +
-                skill.sensitivity * 1.5
-            ),
-            60,
-            99
-        );
-
-
-    const precision =
-        clamp(
-            round(
-                78 +
-                device.screen * 7 +
-                device.ram * 4 +
-                style.precision +
-                skill.precision +
-                platform.precision * 2
-            ),
-            60,
-            99
-        );
-
-
-    const dragControl =
-        clamp(
-            round(
-                76 +
-                device.dpi * 5 +
-                device.fps * 6 +
-                style.dragControl +
-                skill.control
-            ),
-            60,
-            99
-        );
-
-
-    const headshot =
-        clamp(
-            round(
-                78 +
-                device.fps * 4 +
-                device.dpi * 5 +
-                style.headshot +
-                skill.headshot
-            ),
-            60,
-            99
-        );
-
-
-    const aiScore =
-        clamp(
-            round(
-                aimSpeed * 0.22 +
-                precision * 0.28 +
-                dragControl * 0.22 +
-                headshot * 0.28
-            ),
-            60,
-            99
-        );
-
-
-    return {
-
-        sensitivity: {
-
-            general,
-            redDot,
-            scope2,
-            scope4,
-            sniper,
-            freeLook
-
-        },
-
-        dpi:
-            profile.dpi,
-
-        fireButton,
-
-        performance: {
-
-            aimSpeed,
-            precision,
-            dragControl,
-            headshot
-
-        },
-
-        aiScore,
-
-        stabilityScore
-
-    };
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| ANALYSIS ANIMATION
-|--------------------------------------------------------------------------
-*/
-
-const analysisStages = [
-
-    {
-        title:
-            "ANALYZING DEVICE...",
-
-        description:
-            "Reading hardware characteristics",
-
-        stage:
-            "DEVICE ANALYSIS",
-
-        progress:
-            15
-    },
-
-    {
-        title:
-            "ANALYZING DPI...",
-
-        description:
-            "Calculating touch sensitivity response",
-
-        stage:
-            "DPI ANALYSIS",
-
-        progress:
-            31
-    },
-
-    {
-        title:
-            "ANALYZING PLAYSTYLE...",
-
-        description:
-            "Matching aim behavior",
-
-        stage:
-            "PLAYSTYLE ANALYSIS",
-
-        progress:
-            48
-    },
-
-    {
-        title:
-            "CALCULATING AIM RESPONSE...",
-
-        description:
-            "Building sensitivity response model",
-
-        stage:
-            "AIM RESPONSE",
-
-        progress:
-            66
-    },
-
-    {
-        title:
-            "OPTIMIZING SENSITIVITY...",
-
-        description:
-            "Balancing speed and precision",
-
-        stage:
-            "OPTIMIZATION",
-
-        progress:
-            83
-    },
-
-    {
-        title:
-            "GENERATING S-RANK CONFIGURATION...",
-
-        description:
-            "Finalizing your personalized profile",
-
-        stage:
-            "GENERATION",
-
-        progress:
-            100
-    }
-
-];
-
-
-function runAnalysis() {
+function sleep(ms) {
 
     return new Promise(
-        resolve => {
-
-            let index = 0;
-
-
-            function nextStage() {
-
-                const stage =
-                    analysisStages[index];
-
-
-                analysisTitle.textContent =
-                    stage.title;
-
-
-                analysisDescription.textContent =
-                    stage.description;
-
-
-                analysisStage.textContent =
-                    stage.stage;
-
-
-                progressBar.style.width =
-                    `${stage.progress}%`;
-
-
-                progressText.textContent =
-                    `${stage.progress}%`;
-
-
-                index++;
-
-
-                if (
-                    index <
-                    analysisStages.length
-                ) {
-
-                    setTimeout(
-                        nextStage,
-                        620
-                    );
-
-                } else {
-
-                    setTimeout(
-                        resolve,
-                        750
-                    );
-
-                }
-
-            }
-
-
-            nextStage();
-
-        }
+        resolve =>
+            setTimeout(
+                resolve,
+                ms
+            )
     );
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| DISPLAY RESULT
-|--------------------------------------------------------------------------
-*/
+async function runAnalysis() {
+
+    const stages =
+        SENSI_DATA.analysisStages;
+
+
+    for (
+        const stage of stages
+    ) {
+
+        analysisTitle.textContent =
+            stage.title;
+
+        analysisDescription.textContent =
+            stage.description;
+
+        analysisStage.textContent =
+            stage.stage;
+
+        progressBar.style.width =
+            `${stage.progress}%`;
+
+        progressText.textContent =
+            `${stage.progress}%`;
+
+        await sleep(650);
+
+    }
+
+}
+
+
+async function generateSensitivity(
+    profile
+) {
+
+    const response =
+        await fetch(
+            "/api/sensitivity",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(
+                        profile
+                    )
+
+            }
+        );
+
+
+    let data;
+
+    try {
+
+        data =
+            await response.json();
+
+    } catch {
+
+        throw new Error(
+            "Invalid server response."
+        );
+
+    }
+
+
+    if (
+        !response.ok ||
+        !data.success
+    ) {
+
+        throw new Error(
+            data.error ||
+            "Sensitivity generation failed."
+        );
+
+    }
+
+
+    return data;
+
+}
+
 
 function displayResult(
     profile,
-    result
+    data
 ) {
+
+    const result =
+        data.result;
+
+
+    currentResult =
+        result;
+
 
     document.getElementById(
         "generalValue"
@@ -742,61 +323,63 @@ function displayResult(
 
 
     document.getElementById(
+        "dpiValue"
+    ).textContent =
+        profile.dpi;
+
+
+    document.getElementById(
         "fireButton"
     ).textContent =
         `${result.fireButton}%`;
 
 
-    const performance =
-        result.performance;
-
-
     document.getElementById(
         "aimSpeed"
     ).textContent =
-        `${performance.aimSpeed}%`;
+        `${result.performance.aimSpeed}%`;
 
 
     document.getElementById(
         "precision"
     ).textContent =
-        `${performance.precision}%`;
+        `${result.performance.precision}%`;
 
 
     document.getElementById(
         "dragControl"
     ).textContent =
-        `${performance.dragControl}%`;
+        `${result.performance.dragControl}%`;
 
 
     document.getElementById(
         "headshot"
     ).textContent =
-        `${performance.headshot}%`;
+        `${result.performance.headshot}%`;
 
 
     document.getElementById(
         "aimSpeedBar"
     ).style.width =
-        `${performance.aimSpeed}%`;
+        `${result.performance.aimSpeed}%`;
 
 
     document.getElementById(
         "precisionBar"
     ).style.width =
-        `${performance.precision}%`;
+        `${result.performance.precision}%`;
 
 
     document.getElementById(
         "dragControlBar"
     ).style.width =
-        `${performance.dragControl}%`;
+        `${result.performance.dragControl}%`;
 
 
     document.getElementById(
         "headshotBar"
     ).style.width =
-        `${performance.headshot}%`;
+        `${result.performance.headshot}%`;
 
 
     document.getElementById(
@@ -826,13 +409,8 @@ function displayResult(
     document.getElementById(
         "profilePlatform"
     ).textContent =
-        profile.platform.toUpperCase();
-
-
-    document.getElementById(
-        "dpiValue"
-    ).textContent =
-        profile.dpi;
+        profile.platform
+            .toUpperCase();
 
 
     document.getElementById(
@@ -844,7 +422,12 @@ function displayResult(
     document.getElementById(
         "styleValue"
     ).textContent =
-        profile.playstyle.toUpperCase();
+        SENSI_DATA
+            .playstyles[
+                profile.playstyle
+            ]
+            ?.name ||
+        profile.playstyle;
 
 
     document.getElementById(
@@ -852,90 +435,79 @@ function displayResult(
     ).textContent =
         `${profile.playerName}'s optimized configuration`;
 
-
-    const ring =
-        document.getElementById(
-            "scoreRing"
-        );
-
-
-    const angle =
-        result.aiScore * 3.6;
-
-
-    ring.style.setProperty(
-        "--score-angle",
-        `${angle}deg`
-    );
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| GENERATE
-|--------------------------------------------------------------------------
-*/
+async function handleGeneration() {
 
-profileForm.addEventListener(
-    "submit",
-    async event => {
-
-        event.preventDefault();
+    currentProfile =
+        getProfile();
 
 
-        currentProfile =
-            getProfile();
+    if (
+        !currentProfile.playerName ||
+        !currentProfile.device
+    ) {
 
-
-        if (
-            !currentProfile.playstyle
-        ) {
-
-            showToast(
-                "Select a playstyle first."
-            );
-
-            return;
-        }
-
-
-        generateButton.disabled =
-            true;
-
-
-        profileSection.classList.add(
-            "hidden"
+        showToast(
+            "Complete your profile."
         );
 
+        return;
 
-        resultSection.classList.add(
-            "hidden"
-        );
-
-
-        analysisSection.classList.remove(
-            "hidden"
-        );
+    }
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    generateButton.disabled =
+        true;
 
 
-        await runAnalysis();
+    profileSection.classList.add(
+        "hidden"
+    );
 
 
-        currentResult =
+    resultSection.classList.add(
+        "hidden"
+    );
+
+
+    analysisSection.classList.remove(
+        "hidden"
+    );
+
+
+    progressBar.style.width =
+        "0%";
+
+
+    progressText.textContent =
+        "0%";
+
+
+    try {
+
+        /*
+         * Animation uniquement visuelle.
+         * Le résultat réel vient du backend.
+         */
+
+        const generationPromise =
             generateSensitivity(
                 currentProfile
             );
 
 
+        await runAnalysis();
+
+
+        const data =
+            await generationPromise;
+
+
         displayResult(
             currentProfile,
-            currentResult
+            data
         );
 
 
@@ -949,31 +521,61 @@ profileForm.addEventListener(
         );
 
 
+        resultSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        analysisSection.classList.add(
+            "hidden"
+        );
+
+
+        profileSection.classList.remove(
+            "hidden"
+        );
+
+
+        showToast(
+            error.message ||
+            "Generation failed."
+        );
+
+
+    } finally {
+
         generateButton.disabled =
             false;
 
+    }
 
-        setTimeout(() => {
+}
 
-            resultSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
 
-        }, 100);
+form.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        handleGeneration();
 
     }
 );
 
 
-/*
-|--------------------------------------------------------------------------
-| COPY
-|--------------------------------------------------------------------------
-*/
-
 document
-    .getElementById("copyButton")
+    .getElementById(
+        "copyButton"
+    )
     .addEventListener(
         "click",
         async () => {
@@ -1007,7 +609,7 @@ DRAG CONTROL   ${r.performance.dragControl}%
 HEADSHOT       ${r.performance.headshot}%
 
 AI SCORE       ${r.aiScore}/100
-RANK           S-RANK 🔥
+RANK           ${r.rank}
             `.trim();
 
 
@@ -1015,7 +617,9 @@ RANK           S-RANK 🔥
 
                 await navigator
                     .clipboard
-                    .writeText(text);
+                    .writeText(
+                        text
+                    );
 
 
                 showToast(
@@ -1034,14 +638,10 @@ RANK           S-RANK 🔥
     );
 
 
-/*
-|--------------------------------------------------------------------------
-| SHARE
-|--------------------------------------------------------------------------
-*/
-
 document
-    .getElementById("shareButton")
+    .getElementById(
+        "shareButton"
+    )
     .addEventListener(
         "click",
         async () => {
@@ -1049,6 +649,10 @@ document
             if (!currentResult) {
                 return;
             }
+
+
+            const shareText =
+                `WILLIAME AI SENSI — ${currentResult.aiScore}/100 — ${currentResult.rank} 🔥`;
 
 
             if (
@@ -1063,19 +667,40 @@ document
                             "WILLIAME AI SENSI",
 
                         text:
-                            `WILLIAME AI SENSI — ${currentResult.aiScore}/100 S-RANK 🔥`
+                            shareText,
+
+                        url:
+                            window.location.href
 
                     });
 
                 } catch {
-                    // Cancelled.
+
+                    // User cancelled.
+
                 }
 
             } else {
 
-                showToast(
-                    "Sharing is not supported."
-                );
+                try {
+
+                    await navigator
+                        .clipboard
+                        .writeText(
+                            shareText
+                        );
+
+                    showToast(
+                        "Share text copied!"
+                    );
+
+                } catch {
+
+                    showToast(
+                        "Sharing unavailable."
+                    );
+
+                }
 
             }
 
@@ -1083,75 +708,95 @@ document
     );
 
 
-/*
-|--------------------------------------------------------------------------
-| GENERATE AGAIN
-|--------------------------------------------------------------------------
-*/
-
 document
-    .getElementById("againButton")
+    .getElementById(
+        "againButton"
+    )
     .addEventListener(
         "click",
-        async () => {
+        () => {
 
             if (!currentProfile) {
                 return;
             }
 
 
-            resultSection.classList.add(
+            profileSection.classList.add(
                 "hidden"
             );
 
+            resultSection.classList.add(
+                "hidden"
+            );
 
             analysisSection.classList.remove(
                 "hidden"
             );
 
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            generateButton.disabled =
+                true;
 
 
-            await runAnalysis();
+            runAnalysis()
+                .then(
+                    () =>
+                        generateSensitivity(
+                            currentProfile
+                        )
+                )
+                .then(
+                    data => {
 
+                        displayResult(
+                            currentProfile,
+                            data
+                        );
 
-            currentResult =
-                generateSensitivity(
-                    currentProfile
+                        analysisSection.classList.add(
+                            "hidden"
+                        );
+
+                        resultSection.classList.remove(
+                            "hidden"
+                        );
+
+                    }
+                )
+                .catch(
+                    error => {
+
+                        analysisSection.classList.add(
+                            "hidden"
+                        );
+
+                        profileSection.classList.remove(
+                            "hidden"
+                        );
+
+                        showToast(
+                            error.message
+                        );
+
+                    }
+                )
+                .finally(
+                    () => {
+
+                        generateButton.disabled =
+                            false;
+
+                    }
                 );
-
-
-            displayResult(
-                currentProfile,
-                currentResult
-            );
-
-
-            analysisSection.classList.add(
-                "hidden"
-            );
-
-
-            resultSection.classList.remove(
-                "hidden"
-            );
 
         }
     );
 
 
-/*
-|--------------------------------------------------------------------------
-| MODIFY PROFILE
-|--------------------------------------------------------------------------
-*/
-
 document
-    .getElementById("modifyButton")
+    .getElementById(
+        "modifyButton"
+    )
     .addEventListener(
         "click",
         () => {
@@ -1160,14 +805,16 @@ document
                 "hidden"
             );
 
+            analysisSection.classList.add(
+                "hidden"
+            );
 
             profileSection.classList.remove(
                 "hidden"
             );
 
 
-            window.scrollTo({
-                top: 0,
+            profileSection.scrollIntoView({
                 behavior: "smooth"
             });
 
@@ -1175,20 +822,10 @@ document
     );
 
 
-/*
-|--------------------------------------------------------------------------
-| STARTUP
-|--------------------------------------------------------------------------
-*/
-
 console.log(
-    "WILLIAME AI SENSI initialized."
+    "WILLIAME AI SENSI frontend initialized."
 );
 
 console.log(
-    "Local sensitivity engine: ONLINE"
-);
-
-console.log(
-    "External AI: SERVER-SIDE ONLY"
+    "Sensitivity generation: SERVER-SIDE."
 );
