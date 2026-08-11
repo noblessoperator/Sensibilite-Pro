@@ -17,12 +17,10 @@
 
     <meta
         name="description"
-        content="WILLIAME AI SENSI — AI Automatic Sensitivity Generator"
+        content="WILLIAME AI SENSI - AI Automatic Sensitivity Generator"
     >
 
-    <title>
-        WILLIAME AI SENSI
-    </title>
+    <title>WILLIAME AI SENSI</title>
 
     <link
         rel="stylesheet"
@@ -36,32 +34,36 @@
 
 <div class="background-grid"></div>
 
-<div class="red-glow glow-one"></div>
-<div class="red-glow glow-two"></div>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
 
 
 <header class="topbar">
 
-    <a
-        href="/"
-        class="logo"
-    >
+    <div class="brand">
 
-        <span class="logo-mark">
+        <div class="brand-icon">
             W
-        </span>
+        </div>
 
-        <span class="logo-text">
-            WILLIAME <b>AI</b>
-            <small>SENSI</small>
-        </span>
+        <div class="brand-name">
 
-    </a>
+            <strong>
+                WILLIAME <span>AI</span>
+            </strong>
+
+            <small>
+                SENSI
+            </small>
+
+        </div>
+
+    </div>
 
 
-    <div class="online-status">
+    <div class="status">
 
-        <span></span>
+        <i></i>
 
         LOCAL ENGINE ONLINE
 
@@ -70,17 +72,18 @@
 </header>
 
 
-<main class="container">
 
+<main>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
 
 <section class="hero">
 
     <div class="hero-badge">
-
-        <span>⚡</span>
-
-        AI AUTOMATIC SENSITIVITY GENERATOR
-
+        ⚡ AI AUTOMATIC SENSITIVITY GENERATOR
     </div>
 
 
@@ -88,18 +91,18 @@
 
         YOUR AIM.
 
-        <strong>
+        <span>
             OPTIMIZED.
-        </strong>
+        </span>
 
     </h1>
 
 
     <p>
 
-        Analyse your device, DPI and playstyle
-        to generate a personalized
-        Free Fire / Free Fire MAX sensitivity profile.
+        Analyze your device, DPI, FPS and playstyle
+        to generate a personalized Free Fire
+        sensitivity configuration.
 
     </p>
 
@@ -107,20 +110,22 @@
 
 
 
+<!-- =========================================================
+     PROFILE
+========================================================= -->
+
 <section
-    class="panel profile-panel"
+    class="panel"
     id="profileSection"
 >
 
+    <div class="section-header">
 
-    <div class="panel-header">
+        <div class="section-title">
 
-        <div>
-
-            <span class="step-number">
+            <span class="step">
                 01
             </span>
-
 
             <div>
 
@@ -137,7 +142,7 @@
         </div>
 
 
-        <span class="panel-status">
+        <span class="ready">
             READY
         </span>
 
@@ -145,914 +150,837 @@
 
 
 
-<form id="profileForm">
+    <form id="profileForm">
 
 
-<div class="form-grid">
+        <div class="form-grid">
 
 
-<div class="field">
+            <div class="field">
 
-    <label for="playerName">
-        PLAYER NAME
-    </label>
+                <label for="playerName">
+                    PLAYER NAME
+                </label>
 
-    <input
-        id="playerName"
-        type="text"
-        maxlength="30"
-        placeholder="Ex: WILLIAME"
-        required
-    >
+                <input
+                    id="playerName"
+                    type="text"
+                    maxlength="30"
+                    placeholder="Ex: WILLIAME"
+                    required
+                >
 
-</div>
+            </div>
 
 
 
-<div class="field">
+            <div class="field">
 
-    <label for="device">
-        PHONE MODEL
-    </label>
+                <label for="device">
+                    PHONE MODEL
+                </label>
 
-    <input
-        id="device"
-        type="text"
-        maxlength="60"
-        placeholder="Ex: Samsung Galaxy S24"
-        required
-    >
+                <input
+                    id="device"
+                    type="text"
+                    maxlength="60"
+                    placeholder="Ex: Samsung Galaxy S24"
+                    required
+                >
 
-</div>
+            </div>
 
 
 
-<div class="field">
+            <div class="field">
 
-    <label for="platform">
-        PLATFORM
-    </label>
+                <label for="platform">
+                    PLATFORM
+                </label>
 
-    <select
-        id="platform"
-        required
-    >
+                <select
+                    id="platform"
+                    required
+                >
 
-        <option value="">
-            Select platform
-        </option>
+                    <option value="">
+                        Select platform
+                    </option>
 
-        <option value="android">
-            Android
-        </option>
+                    <option value="android">
+                        Android
+                    </option>
 
-        <option value="ios">
-            iOS
-        </option>
+                    <option value="ios">
+                        iOS
+                    </option>
 
-    </select>
+                </select>
 
-</div>
+            </div>
 
 
 
-<div class="field">
+            <div class="field">
 
-    <label for="dpi">
-        DPI
-    </label>
+                <label for="dpi">
+                    DPI
+                </label>
 
-    <input
-        id="dpi"
-        type="number"
-        min="200"
-        max="1000"
-        value="520"
-        required
-    >
+                <input
+                    id="dpi"
+                    type="number"
+                    min="200"
+                    max="1000"
+                    value="520"
+                    required
+                >
 
-</div>
+            </div>
 
 
 
-<div class="field">
+            <div class="field">
 
-    <label for="screen">
-        SCREEN SIZE
-    </label>
+                <label for="screen">
+                    SCREEN SIZE
+                </label>
 
-    <input
-        id="screen"
-        type="number"
-        min="4"
-        max="15"
-        step="0.1"
-        placeholder="Ex: 6.7"
-        required
-    >
+                <div class="input-unit">
 
-    <span class="unit">
-        INCH
-    </span>
+                    <input
+                        id="screen"
+                        type="number"
+                        min="4"
+                        max="15"
+                        step="0.1"
+                        placeholder="6.7"
+                        required
+                    >
 
-</div>
+                    <span>
+                        INCH
+                    </span>
 
+                </div>
 
+            </div>
 
-<div class="field">
 
-    <label for="ram">
-        RAM
-    </label>
 
-    <select
-        id="ram"
-        required
-    >
+            <div class="field">
 
-        <option value="">
-            Select RAM
-        </option>
+                <label for="ram">
+                    RAM
+                </label>
 
-        <option value="2">
-            2 GB
-        </option>
+                <select
+                    id="ram"
+                    required
+                >
 
-        <option value="3">
-            3 GB
-        </option>
+                    <option value="">
+                        Select RAM
+                    </option>
 
-        <option value="4">
-            4 GB
-        </option>
+                    <option value="2">
+                        2 GB
+                    </option>
 
-        <option value="6">
-            6 GB
-        </option>
+                    <option value="3">
+                        3 GB
+                    </option>
 
-        <option value="8">
-            8 GB
-        </option>
+                    <option value="4">
+                        4 GB
+                    </option>
 
-        <option value="12">
-            12 GB
-        </option>
+                    <option value="6">
+                        6 GB
+                    </option>
 
-        <option value="16">
-            16 GB
-        </option>
+                    <option value="8">
+                        8 GB
+                    </option>
 
-        <option value="24">
-            24 GB+
-        </option>
+                    <option value="12">
+                        12 GB
+                    </option>
 
-    </select>
+                    <option value="16">
+                        16 GB
+                    </option>
 
-</div>
+                    <option value="24">
+                        24 GB+
+                    </option>
 
+                </select>
 
+            </div>
 
-<div class="field">
 
-    <label for="fps">
-        AVAILABLE FPS
-    </label>
 
-    <select
-        id="fps"
-        required
-    >
+            <div class="field">
 
-        <option value="">
-            Select FPS
-        </option>
+                <label for="fps">
+                    AVAILABLE FPS
+                </label>
 
-        <option value="30">
-            30 FPS
-        </option>
+                <select
+                    id="fps"
+                    required
+                >
 
-        <option value="45">
-            45 FPS
-        </option>
+                    <option value="">
+                        Select FPS
+                    </option>
 
-        <option value="60">
-            60 FPS
-        </option>
+                    <option value="30">
+                        30 FPS
+                    </option>
 
-        <option value="90">
-            90 FPS
-        </option>
+                    <option value="45">
+                        45 FPS
+                    </option>
 
-        <option value="120">
-            120 FPS
-        </option>
+                    <option value="60">
+                        60 FPS
+                    </option>
 
-    </select>
+                    <option value="90">
+                        90 FPS
+                    </option>
 
-</div>
+                    <option value="120">
+                        120 FPS
+                    </option>
 
+                </select>
 
+            </div>
 
-<div class="field">
 
-    <label for="skill">
-        PLAYER LEVEL
-    </label>
 
-    <select
-        id="skill"
-        required
-    >
+            <div class="field">
 
-        <option value="">
-            Select level
-        </option>
+                <label for="skill">
+                    PLAYER LEVEL
+                </label>
 
-        <option value="beginner">
-            Beginner
-        </option>
+                <select
+                    id="skill"
+                    required
+                >
 
-        <option value="intermediate">
-            Intermediate
-        </option>
+                    <option value="">
+                        Select level
+                    </option>
 
-        <option value="advanced">
-            Advanced
-        </option>
+                    <option value="beginner">
+                        Beginner
+                    </option>
 
-        <option value="pro">
-            Pro
-        </option>
+                    <option value="intermediate">
+                        Intermediate
+                    </option>
 
-    </select>
+                    <option value="advanced">
+                        Advanced
+                    </option>
 
-</div>
+                    <option value="pro">
+                        Pro
+                    </option>
 
+                </select>
 
-</div>
+            </div>
 
+        </div>
 
 
-<div class="style-section">
 
-    <label>
-        PLAYSTYLE
-    </label>
+        <div class="playstyle">
 
+            <label>
+                PLAYSTYLE
+            </label>
 
-    <div class="style-grid">
 
+            <div class="style-grid">
 
-        <label class="style-option">
 
-            <input
-                type="radio"
-                name="playstyle"
-                value="one-tap"
-                required
-            >
+                <label class="style-card">
 
-            <span>
+                    <input
+                        type="radio"
+                        name="playstyle"
+                        value="one-tap"
+                        required
+                    >
 
-                <b>
-                    ONE TAP
-                </b>
+                    <span class="style-content">
+
+                        <b>
+                            ONE TAP
+                        </b>
+
+                        <small>
+                            Precision headshots
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+
+                <label class="style-card">
+
+                    <input
+                        type="radio"
+                        name="playstyle"
+                        value="drag"
+                    >
+
+                    <span class="style-content">
+
+                        <b>
+                            DRAG HEADSHOT
+                        </b>
+
+                        <small>
+                            Fast drag control
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+
+                <label class="style-card">
+
+                    <input
+                        type="radio"
+                        name="playstyle"
+                        value="rush"
+                    >
+
+                    <span class="style-content">
+
+                        <b>
+                            RUSH
+                        </b>
+
+                        <small>
+                            Close combat
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+
+                <label class="style-card">
+
+                    <input
+                        type="radio"
+                        name="playstyle"
+                        value="sniper"
+                    >
+
+                    <span class="style-content">
+
+                        <b>
+                            SNIPER
+                        </b>
+
+                        <small>
+                            Long range
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+
+                <label class="style-card">
+
+                    <input
+                        type="radio"
+                        name="playstyle"
+                        value="balanced"
+                    >
+
+                    <span class="style-content">
+
+                        <b>
+                            BALANCED
+                        </b>
+
+                        <small>
+                            All-round control
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+            </div>
+
+        </div>
+
+
+
+        <button
+            class="generate-button"
+            id="generateButton"
+            type="submit"
+        >
+
+            <span class="generate-icon">
+                🤖
+            </span>
+
+            <span class="generate-text">
+
+                <strong>
+                    GENERATE WITH AI
+                </strong>
 
                 <small>
-                    Precision headshots
+                    Analyze & optimize my setup
                 </small>
 
             </span>
 
-        </label>
-
-
-
-        <label class="style-option">
-
-            <input
-                type="radio"
-                name="playstyle"
-                value="drag"
-            >
-
-            <span>
-
-                <b>
-                    DRAG HEADSHOT
-                </b>
-
-                <small>
-                    Fast drag control
-                </small>
-
+            <span class="generate-arrow">
+                →
             </span>
 
-        </label>
+        </button>
 
 
-
-        <label class="style-option">
-
-            <input
-                type="radio"
-                name="playstyle"
-                value="rush"
-            >
-
-            <span>
-
-                <b>
-                    RUSH
-                </b>
-
-                <small>
-                    Fast close combat
-                </small>
-
-            </span>
-
-        </label>
-
-
-
-        <label class="style-option">
-
-            <input
-                type="radio"
-                name="playstyle"
-                value="sniper"
-            >
-
-            <span>
-
-                <b>
-                    SNIPER
-                </b>
-
-                <small>
-                    Long range precision
-                </small>
-
-            </span>
-
-        </label>
-
-
-
-        <label class="style-option">
-
-            <input
-                type="radio"
-                name="playstyle"
-                value="balanced"
-            >
-
-            <span>
-
-                <b>
-                    BALANCED
-                </b>
-
-                <small>
-                    All-round control
-                </small>
-
-            </span>
-
-        </label>
-
-
-    </div>
-
-</div>
-
-
-
-<button
-    class="generate-button"
-    id="generateButton"
-    type="submit"
->
-
-    <span class="button-icon">
-        🤖
-    </span>
-
-
-    <span>
-
-        <strong>
-            GENERATE WITH AI
-        </strong>
-
-        <small>
-            Analyze & optimize my setup
-        </small>
-
-    </span>
-
-
-    <span class="button-arrow">
-        →
-    </span>
-
-</button>
-
-
-</form>
+    </form>
 
 </section>
 
 
+
+<!-- =========================================================
+     ANALYSIS
+========================================================= -->
 
 <section
     class="panel analysis-panel hidden"
     id="analysisSection"
 >
 
+    <div class="analysis-content">
 
-<div class="analysis-center">
 
+        <div class="scanner">
 
-<div class="scanner">
+            <div class="scanner-ring"></div>
 
-    <div class="scanner-ring"></div>
+            <div class="scanner-core">
+                W
+            </div>
 
-    <div class="scanner-core">
-        W
-    </div>
+        </div>
 
-</div>
 
+        <span class="engine-name">
+            WILLIAME AI ENGINE
+        </span>
 
-<span class="analysis-label">
-    WILLIAME AI ENGINE
-</span>
 
+        <h2 id="analysisTitle">
+            ANALYZING DEVICE...
+        </h2>
 
-<h2 id="analysisTitle">
-    ANALYZING DEVICE...
-</h2>
 
+        <p id="analysisDescription">
+            Reading hardware characteristics
+        </p>
 
-<p id="analysisDescription">
-    Reading hardware characteristics
-</p>
 
+        <div class="progress">
 
+            <div class="progress-track">
 
-<div class="progress-container">
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
 
+            </div>
 
-<div class="progress-track">
 
-    <div
-        class="progress-bar"
-        id="progressBar"
-    ></div>
+            <div class="progress-info">
 
-</div>
+                <span id="progressText">
+                    0%
+                </span>
 
+                <span id="analysisStage">
+                    INITIALIZING
+                </span>
 
-<div class="progress-info">
-
-    <span id="progressText">
-        0%
-    </span>
-
-    <span id="analysisStage">
-        INITIALIZING
-    </span>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<section
-    class="result-section hidden"
-    id="resultSection"
->
-
-
-<div class="result-header">
-
-
-<div>
-
-    <span class="result-label">
-        WILLIAME AI SENSI
-    </span>
-
-    <h2>
-        S-RANK RESULT
-    </h2>
-
-    <p id="resultSubtitle">
-        Personalized sensitivity configuration
-    </p>
-
-</div>
-
-
-<div class="rank-badge">
-
-    <span>
-        S-RANK
-    </span>
-
-    <small>
-        🔥
-    </small>
-
-</div>
-
-
-</div>
-
-
-
-<div class="result-grid">
-
-
-<div class="sensitivity-card">
-
-
-<div class="card-title">
-
-    <span>🎯</span>
-
-    SENSITIVITY
-
-</div>
-
-
-
-<div class="sensitivity-list">
-
-<div>
-    <span>GENERAL</span>
-    <strong id="generalValue">--</strong>
-</div>
-
-<div>
-    <span>RED DOT</span>
-    <strong id="redDotValue">--</strong>
-</div>
-
-<div>
-    <span>2X SCOPE</span>
-    <strong id="scope2Value">--</strong>
-</div>
-
-<div>
-    <span>4X SCOPE</span>
-    <strong id="scope4Value">--</strong>
-</div>
-
-<div>
-    <span>SNIPER SCOPE</span>
-    <strong id="sniperValue">--</strong>
-</div>
-
-<div>
-    <span>FREE LOOK</span>
-    <strong id="freeLookValue">--</strong>
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="performance-card">
-
-
-<div class="card-title">
-
-    <span>⚡</span>
-
-    PERFORMANCE
-
-</div>
-
-
-
-<div class="performance-item">
-
-<div>
-
-    <span>
-        AIM SPEED
-    </span>
-
-    <strong id="aimSpeed">
-        --%
-    </strong>
-
-</div>
-
-<div class="meter">
-    <span id="aimSpeedBar"></span>
-</div>
-
-</div>
-
-
-
-<div class="performance-item">
-
-<div>
-
-    <span>
-        PRECISION
-    </span>
-
-    <strong id="precision">
-        --%
-    </strong>
-
-</div>
-
-<div class="meter">
-    <span id="precisionBar"></span>
-</div>
-
-</div>
-
-
-
-<div class="performance-item">
-
-<div>
-
-    <span>
-        DRAG CONTROL
-    </span>
-
-    <strong id="dragControl">
-        --%
-    </strong>
-
-</div>
-
-<div class="meter">
-    <span id="dragControlBar"></span>
-</div>
-
-</div>
-
-
-
-<div class="performance-item">
-
-<div>
-
-    <span>
-        HEADSHOT
-    </span>
-
-    <strong id="headshot">
-        --%
-    </strong>
-
-</div>
-
-<div class="meter">
-    <span id="headshotBar"></span>
-</div>
-
-</div>
-
-
-</div>
-
-
-
-<div class="device-card">
-
-
-<div class="card-title">
-
-    <span>📱</span>
-
-    DEVICE PROFILE
-
-</div>
-
-
-
-<div class="device-info">
-
-
-<div>
-    <span>PLAYER</span>
-    <strong id="profilePlayer">--</strong>
-</div>
-
-
-<div>
-    <span>DEVICE</span>
-    <strong id="profileDevice">--</strong>
-</div>
-
-
-<div>
-    <span>PLATFORM</span>
-    <strong id="profilePlatform">--</strong>
-</div>
-
-
-<div>
-    <span>DPI</span>
-    <strong id="dpiValue">--</strong>
-</div>
-
-
-<div>
-    <span>FPS</span>
-    <strong id="fpsValue">--</strong>
-</div>
-
-
-<div>
-    <span>PLAYSTYLE</span>
-    <strong id="styleValue">--</strong>
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<div class="score-card">
-
-    <span>
-        AI SCORE
-    </span>
-
-
-    <div class="score-number">
-
-        <strong id="aiScore">
-            --
-        </strong>
-
-        <small>
-            / 100
-        </small>
-
-    </div>
-
-
-    <div class="score-ring">
-
-        <div id="scoreRing">
-
-            <span id="scoreRingValue">
-                --
-            </span>
+            </div>
 
         </div>
 
     </div>
 
+</section>
 
-    <div class="score-rank">
 
-        S-RANK 🔥
+
+<!-- =========================================================
+     RESULT
+========================================================= -->
+
+<section
+    class="result hidden"
+    id="resultSection"
+>
+
+
+    <div class="result-top">
+
+        <div>
+
+            <span>
+                WILLIAME AI SENSI
+            </span>
+
+            <h2>
+                S-RANK RESULT
+            </h2>
+
+            <p id="resultSubtitle">
+                Personalized configuration
+            </p>
+
+        </div>
+
+
+        <div class="rank">
+            S-RANK 🔥
+        </div>
 
     </div>
 
-</div>
 
 
-</div>
+    <div class="result-grid">
+
+
+        <!-- SENSITIVITY -->
+
+        <div class="result-card">
+
+            <div class="card-heading">
+                🎯 SENSITIVITY
+            </div>
+
+
+            <div class="sensitivity-list">
+
+                <div>
+                    <span>GENERAL</span>
+                    <strong id="generalValue">--</strong>
+                </div>
+
+                <div>
+                    <span>RED DOT</span>
+                    <strong id="redDotValue">--</strong>
+                </div>
+
+                <div>
+                    <span>2X SCOPE</span>
+                    <strong id="scope2Value">--</strong>
+                </div>
+
+                <div>
+                    <span>4X SCOPE</span>
+                    <strong id="scope4Value">--</strong>
+                </div>
+
+                <div>
+                    <span>SNIPER SCOPE</span>
+                    <strong id="sniperValue">--</strong>
+                </div>
+
+                <div>
+                    <span>FREE LOOK</span>
+                    <strong id="freeLookValue">--</strong>
+                </div>
+
+            </div>
+
+        </div>
 
 
 
-<div class="extra-config">
+        <!-- PERFORMANCE -->
+
+        <div class="result-card">
+
+            <div class="card-heading">
+                ⚡ PERFORMANCE
+            </div>
 
 
-<div>
-
-    <span>
-        DPI
-    </span>
-
-    <strong id="resultDpi">
-        --
-    </strong>
-
-</div>
+            <div class="performance-list">
 
 
-<div>
+                <div class="performance">
 
-    <span>
-        FIRE BUTTON
-    </span>
+                    <div>
+                        <span>AIM SPEED</span>
+                        <b id="aimSpeed">--%</b>
+                    </div>
 
-    <strong id="fireButton">
-        --%
-    </strong>
+                    <div class="meter">
+                        <i id="aimSpeedBar"></i>
+                    </div>
 
-</div>
-
-
-</div>
+                </div>
 
 
+                <div class="performance">
 
-<div class="result-actions">
+                    <div>
+                        <span>PRECISION</span>
+                        <b id="precision">--%</b>
+                    </div>
 
+                    <div class="meter">
+                        <i id="precisionBar"></i>
+                    </div>
 
-<button
-    type="button"
-    class="action-button primary-action"
-    id="copyButton"
->
-    📋 COPY CONFIGURATION
-</button>
-
-
-<button
-    type="button"
-    class="action-button"
-    id="shareButton"
->
-    📤 SHARE CONFIGURATION
-</button>
+                </div>
 
 
-<button
-    type="button"
-    class="action-button"
-    id="againButton"
->
-    🔄 GENERATE AGAIN
-</button>
+                <div class="performance">
+
+                    <div>
+                        <span>DRAG CONTROL</span>
+                        <b id="dragControl">--%</b>
+                    </div>
+
+                    <div class="meter">
+                        <i id="dragControlBar"></i>
+                    </div>
+
+                </div>
 
 
-<button
-    type="button"
-    class="action-button"
-    id="modifyButton"
->
-    ⚙️ MODIFY PROFILE
-</button>
+                <div class="performance">
+
+                    <div>
+                        <span>HEADSHOT</span>
+                        <b id="headshot">--%</b>
+                    </div>
+
+                    <div class="meter">
+                        <i id="headshotBar"></i>
+                    </div>
+
+                </div>
 
 
-</div>
+            </div>
+
+        </div>
 
 
-<p class="disclaimer">
 
-    WILLIAME AI SENSI generates an estimated configuration
-    based on the information provided. Results may vary
-    depending on device, game version and personal aim habits.
+        <!-- DEVICE -->
 
-</p>
+        <div class="result-card">
+
+            <div class="card-heading">
+                📱 DEVICE PROFILE
+            </div>
+
+
+            <div class="device-list">
+
+                <div>
+                    <span>PLAYER</span>
+                    <b id="profilePlayer">--</b>
+                </div>
+
+                <div>
+                    <span>DEVICE</span>
+                    <b id="profileDevice">--</b>
+                </div>
+
+                <div>
+                    <span>PLATFORM</span>
+                    <b id="profilePlatform">--</b>
+                </div>
+
+                <div>
+                    <span>DPI</span>
+                    <b id="dpiValue">--</b>
+                </div>
+
+                <div>
+                    <span>FPS</span>
+                    <b id="fpsValue">--</b>
+                </div>
+
+                <div>
+                    <span>STYLE</span>
+                    <b id="styleValue">--</b>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SCORE -->
+
+        <div class="score-card">
+
+            <span>
+                AI SCORE
+            </span>
+
+
+            <div class="score">
+
+                <strong id="aiScore">
+                    --
+                </strong>
+
+                <small>
+                    /100
+                </small>
+
+            </div>
+
+
+            <div class="score-circle">
+
+                <span id="scoreRingValue">
+                    --
+                </span>
+
+            </div>
+
+
+            <b>
+                S-RANK 🔥
+            </b>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="extra">
+
+        <div>
+            <span>DPI</span>
+            <b id="resultDpi">--</b>
+        </div>
+
+        <div>
+            <span>FIRE BUTTON</span>
+            <b id="fireButton">--%</b>
+        </div>
+
+    </div>
+
+
+
+    <div class="actions">
+
+        <button
+            id="copyButton"
+            class="action primary"
+        >
+            📋 COPY CONFIGURATION
+        </button>
+
+
+        <button
+            id="shareButton"
+            class="action"
+        >
+            📤 SHARE CONFIGURATION
+        </button>
+
+
+        <button
+            id="againButton"
+            class="action"
+        >
+            🔄 GENERATE AGAIN
+        </button>
+
+
+        <button
+            id="modifyButton"
+            class="action"
+        >
+            ⚙️ MODIFY PROFILE
+        </button>
+
+    </div>
+
+
+    <p class="disclaimer">
+
+        WILLIAME AI SENSI provides an estimated sensitivity
+        configuration based on the profile submitted.
+        Results may vary depending on device, game version
+        and individual aim habits.
+
+    </p>
 
 
 </section>
-
 
 </main>
 
 
 
-<footer class="footer">
+<footer>
 
-    <div>
-        WILLIAME <b>AI</b> SENSI
-    </div>
+    <strong>
+        WILLIAME AI SENSI
+    </strong>
 
     <span>
         AI AUTOMATIC SENSITIVITY GENERATOR
     </span>
 
-    <span>
+    <small>
         © 2026 WILLIAME AI
-    </span>
+    </small>
 
 </footer>
 
 
 
 <div
-    class="toast"
     id="toast"
+    class="toast"
 >
     Configuration copied!
 </div>
